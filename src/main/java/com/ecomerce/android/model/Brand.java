@@ -19,22 +19,31 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "brand")
 public class Brand implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="brand_ID")
-	private Integer brandId;
+	private int brandId;
 
+	@Column(name = "name", columnDefinition = "varchar(200)")
+    private String name;
+	
+	@Column(name = "logo", columnDefinition = "varchar(255)")
+	private String logo;
+	
 	@Column(name="created_at")
 	private Timestamp createdAt;
-
-	private String name;
-	private String logo;
 
 	@Column(name="update_at")
 	private Timestamp updateAt;
 
+	@Lob
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
+    private byte[] imageData;
+	
 	@PrePersist
 	public void prePersist() {
 		this.createdAt = Timestamp.valueOf(LocalDateTime.now());

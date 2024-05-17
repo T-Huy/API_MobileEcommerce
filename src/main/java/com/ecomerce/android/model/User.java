@@ -1,13 +1,5 @@
 package com.ecomerce.android.model;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,28 +10,45 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user")
 public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private static final long OTP_VALID_DURATION = 5 * 60 * 1000;   // 5 minutes
 	
 	@Id
-	@Column(name = "user_name")
+	@Column(name = "user_name", columnDefinition = "varchar(100)")
 	private String userName;
 
-	@Column(name="created_at")
-	private Timestamp createdAt;
-
-	private String email;
-
+	@Column(name = "password", columnDefinition = "varchar(100)")
 	private String password;
 	
+	@Column(name = "role", columnDefinition = "varchar(15)")
 	private String role;
+	
+	@Column(name = "email", columnDefinition = "varchar(255)")
+	private String email;
+	
+	@Column(name="created_at")
+	private Timestamp createdAt;
 
 	@Column(name="update_at")
 	private Timestamp updateAt;

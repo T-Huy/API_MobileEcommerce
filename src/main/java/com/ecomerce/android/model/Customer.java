@@ -1,51 +1,58 @@
 package com.ecomerce.android.model;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.NamedQuery;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.*;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-
-
-/**
- * The persistent class for the customer database table.
- * 
- */
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "customer")
 public class Customer {
+	
 	@Id
-	@Column(name="user_name")
+	@Column(name = "user_name", columnDefinition = "varchar(100)")
 	private String userName;
+	
+	@Column(name = "fullname", columnDefinition = "varchar(200)")
+	private String fullname;
+	
+	@Column(name = "address", columnDefinition = "varchar(200)")
 	private String address;
 
-	private String avatar;
+	@Column(name = "phonenumber", columnDefinition = "varchar(11)")
+    private String phoneNumber;
 
-	private String fullname;
+	@Column(name = "avatar", columnDefinition = "varchar(200)")
+    private String avatar;
 
-	private String phonenumber;
-
+	@Column(name = "province")
+    private String province;
+	
 	@Column(name = "code_province")
 	private Integer codeProvince;
 
+	@Column(name = "district")
+    private String district;
+	
 	@Column(name = "code_district")
 	private Integer codeDistrict;
 
+	@Column(name = "subdistrict")
+    private String subdistrict;
+	
 	@Column(name = "code_subdistrict")
 	private Integer codeSubDistrict;
 

@@ -18,10 +18,20 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_ID")
-    private Integer reviewId;
+    private int reviewId;
 
-    private Integer rate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_ID")
+    private Product product;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_name", nullable = false)
+    private Customer customer;
+    
+    @Column(name = "rate")
+    private int rate;
 
+    @Column(name = "content", columnDefinition = "varchar(255)")
     private String content;
 
     @Column(name="created_at")
@@ -29,13 +39,6 @@ public class Review {
 
     @Column(name="update_at")
     private Timestamp updateAt;
-
-    @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
-    @ManyToOne
-    @JoinColumn(name = "userName")
-    private Customer customer;
 
     @PrePersist
     public void prePersist() {

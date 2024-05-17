@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "product")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,35 +28,42 @@ public class Product implements Serializable {
 	@Column(name = "product_ID")
 	private int productId;
 
-	private String cpu;
+	@Column(name="product_name", columnDefinition = "varchar(50)")
+	private String productName;
+	
+	@Column(name = "os", columnDefinition = "varchar(20)")
+    private String os;
+	
+	@Column(name = "cpu", columnDefinition = "varchar(100)")
+    private String cpu;
 
+	@Column(name = "origin", columnDefinition = "varchar(200)")
+    private String origin;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="brandId")
+	private Brand brand;
+	
+	@Column(name = "description", columnDefinition = "varchar(4000)")
+	private String description;
+	
+	@Column(name = "battery", columnDefinition = "varchar(50)")
+    private String battery;
+	
+	@Column(name = "screen", columnDefinition = "varchar(20)")
+    private String screen;
+	
+	@Column(name = "price")
+    private double price;
+	
 	@Column(name="created_at")
 	private Timestamp createdAt;
-
-	private String description;
-
-	private String origin;
-
-	private String os;
-
-	@Column(name="product_name")
-	private String productName;
-
-	private String battery;
-
-	private String screen;
-
-	private Double price;
 
 	@Column(name="update_at")
 	private Timestamp updateAt;
 
 	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
 	private List<Option> options;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="brandId")
-	private Brand brand;
 
 	@PrePersist
 	public void prePersist() {

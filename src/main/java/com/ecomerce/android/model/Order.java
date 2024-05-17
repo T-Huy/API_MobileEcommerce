@@ -1,20 +1,27 @@
 package com.ecomerce.android.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -30,31 +37,34 @@ public class Order implements Serializable {
 	@Column(name = "order_ID")
 	private int orderId;
 
-	@Column(name="created_at")
-	private Timestamp createdAt;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_name")
+	private Customer customer;
 
 	@Column(name="total_price")
 	private double totalPrice;
-
+	
+	@Column(name="status")
+	private Status status;
+	
+	@Column(name = "order_date")
+    private Timestamp order_date;
+	
+	@Column(name="created_at")
+	private Timestamp createdAt;
+	
 	@Column(name="update_at")
 	private Timestamp updateAt;
-	private Status status;
+	
+	
 	@OneToMany(mappedBy="order", cascade = CascadeType.PERSIST)
 	private List<Lineitem> lineitems;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="userName")
-	private Customer customer;
-	
-	@Column(name="order_date")
-	private Timestamp order_date;
-
-
 	@PrePersist
 	public void prePersist() {
+		this.order_date = Timestamp.valueOf(LocalDateTime.now());
 		this.createdAt = Timestamp.valueOf(LocalDateTime.now());
 		this.updateAt = Timestamp.valueOf(LocalDateTime.now());
-		this.order_date = Timestamp.valueOf(LocalDateTime.now());
 	}
 
 	@PreUpdate

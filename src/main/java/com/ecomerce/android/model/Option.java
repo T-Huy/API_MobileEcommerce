@@ -1,14 +1,22 @@
 package com.ecomerce.android.model;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -24,20 +32,26 @@ public class Option implements Serializable {
 	@Column(name = "options_ID")
 	private int optionId;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_ID")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "color_ID")
+    private Color color;
+	
+    @Column(name = "ram", columnDefinition = "varchar(100)")
 	private String ram;
 
+    @Column(name = "rom", columnDefinition = "varchar(100)")
 	private String rom;
 
-	private Double price;
+	@Column(name = "price")
+	private double price;
 
-	private Integer status;
+	@Column(name = "status")
+	private int status;
 
 	@OneToMany(mappedBy="option")
 	private List<Image> images;
-	@OneToMany(mappedBy="option")
-	private List<Lineitem> lineitems;
-
-	@ManyToOne
-	@JoinColumn(name="productId")
-	private Product product;
 }

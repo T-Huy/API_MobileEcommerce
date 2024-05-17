@@ -1,14 +1,13 @@
 package com.ecomerce.android.config;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.cloudinary.Cloudinary;
 
 @Configuration
 public class AppConfig {
@@ -21,9 +20,9 @@ public class AppConfig {
     @Bean
     public Cloudinary cloudinary() {
         Map config = new HashMap();
-        config.put("cloud_name", "dzh20mgpq");
-        config.put("api_key", "617993988448684");
-        config.put("api_secret", "Ys982BOVwVFQ00CXEWR-zvKRS3Y");
+        config.put("cloud_name", "diuvcc3pl");
+        config.put("api_key", "575575684348628");
+        config.put("api_secret", "b5OJWsgfU6bvlZx1EGp95kj5R5E");
         Cloudinary cloudinary = new Cloudinary(config);
         return cloudinary;
     }
