@@ -1,20 +1,21 @@
 package com.ecomerce.android.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cloudinary.Cloudinary;
 import com.ecomerce.android.config.uploadFile.IStorageService;
 import com.ecomerce.android.dto.CustomerDTO;
 import com.ecomerce.android.mapper.Mapper;
 import com.ecomerce.android.model.Customer;
-import com.ecomerce.android.model.User;
 import com.ecomerce.android.responsitory.CustomerRepository;
 import com.ecomerce.android.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -85,5 +86,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public <S extends Customer> boolean save(S entity) {
 		// TODO Auto-generated method stub
 		return customerRepository.save(entity) != null;
+	}
+
+	@Override
+	public List<CustomerDTO> findAll() {
+		return customerRepository.findAll()
+				.stream()
+				.map(customer -> mapper.convertTo(customer, CustomerDTO.class))
+				.collect(Collectors.toList());
 	}
 }

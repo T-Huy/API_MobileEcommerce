@@ -73,5 +73,10 @@ public class CustomerController {
                 new ResponseObject("Success", "Update Customer Successfully", "")
         );
     }
+    
+    @GetMapping("/customer/customers")
+	public ResponseEntity<?> getAllCustomer() {
+		return ResponseEntity.status(HttpStatus.OK).body(customerService.findAll());
+	}
 
 }

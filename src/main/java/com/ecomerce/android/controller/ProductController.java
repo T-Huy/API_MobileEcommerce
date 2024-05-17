@@ -32,9 +32,7 @@ public class ProductController {
 	// Lấy tất cả sản phẩm theo brandId
 	@GetMapping(value = "/product/{brandId}")
 	public ResponseEntity<?> getAllProductByBrand(@PathVariable("brandId") Integer brandId) {
-		return ResponseEntity.status(HttpStatus.OK).body(
-				productService.getProductByBrand(brandId)
-		);
+		return ResponseEntity.status(HttpStatus.OK).body(productService.getProductByBrand(brandId));
 	};
 	// Lấy tất cả sản phẩm
 	@GetMapping( "/product")
