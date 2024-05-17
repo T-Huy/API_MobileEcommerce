@@ -40,21 +40,12 @@ public class Customer {
 
 	@Column(name = "province", columnDefinition = "varchar(200)")
     private String province;
-	
-	@Column(name = "code_province")
-	private Integer codeProvince;
 
 	@Column(name = "district", columnDefinition = "varchar(200)")
     private String district;
-	
-	@Column(name = "code_district")
-	private Integer codeDistrict;
 
 	@Column(name = "subdistrict", columnDefinition = "varchar(200)")
     private String subdistrict;
-	
-	@Column(name = "code_subdistrict")
-	private Integer codeSubDistrict;
 
 	@OneToOne()
 	@JoinColumn(name="userName")
@@ -73,11 +64,5 @@ public class Customer {
 		this.province = province;
 		this.district = district;
 		this.subdistrict = subdistrict;
-//	public Customer(String userName, Integer codeProvince, Integer codeDistrict, Integer codeSubDistrict) {
-//		super();
-//		this.userName = userName;
-//		this.codeProvince = codeProvince;
-//		this.codeDistrict = codeDistrict;
-//		this.codeSubDistrict = codeSubDistrict;
 	}
 }
