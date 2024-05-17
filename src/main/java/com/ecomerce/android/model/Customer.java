@@ -38,19 +38,19 @@ public class Customer {
 	@Column(name = "avatar", columnDefinition = "varchar(200)")
     private String avatar;
 
-	@Column(name = "province")
+	@Column(name = "province", columnDefinition = "varchar(200)")
     private String province;
 	
 	@Column(name = "code_province")
 	private Integer codeProvince;
 
-	@Column(name = "district")
+	@Column(name = "district", columnDefinition = "varchar(200)")
     private String district;
 	
 	@Column(name = "code_district")
 	private Integer codeDistrict;
 
-	@Column(name = "subdistrict")
+	@Column(name = "subdistrict", columnDefinition = "varchar(200)")
     private String subdistrict;
 	
 	@Column(name = "code_subdistrict")
@@ -67,12 +67,17 @@ public class Customer {
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
 
-
-	public Customer(String userName, Integer codeProvince, Integer codeDistrict, Integer codeSubDistrict) {
+	public Customer(String userName, String province, String district, String subdistrict) {
 		super();
 		this.userName = userName;
-		this.codeProvince = codeProvince;
-		this.codeDistrict = codeDistrict;
-		this.codeSubDistrict = codeSubDistrict;
+		this.province = province;
+		this.district = district;
+		this.subdistrict = subdistrict;
+//	public Customer(String userName, Integer codeProvince, Integer codeDistrict, Integer codeSubDistrict) {
+//		super();
+//		this.userName = userName;
+//		this.codeProvince = codeProvince;
+//		this.codeDistrict = codeDistrict;
+//		this.codeSubDistrict = codeSubDistrict;
 	}
 }

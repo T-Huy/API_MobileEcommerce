@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
-    @Query(value = "Update customer set fullname = ?1, address = ?2, phonenumber = ?3, code_province = ?4, code_district = ?5, code_subdistrict = ?6 where user_name = ?7", nativeQuery = true)
-    int UpdateCustomer(String fullname, String address, String phonenumber, Integer codeProvince, Integer codeDistrict, Integer codeSubDistrict, String username);
+    @Query(value = "Update customer set fullname = ?1, address = ?2, phonenumber = ?3, province = ?4, district = ?5, subdistrict = ?6 where user_name = ?7", nativeQuery = true)
+    int UpdateCustomer(String fullname, String address, String phonenumber, String province, String district, String subdistrict, String username);
 }
