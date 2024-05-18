@@ -25,8 +25,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query(value = "SELECT brand.`name` From brand", nativeQuery = true)
     List<String> getAllBrandName();
 
-    @Query(value = "select sum(o.totalPrice) from Order o WHERE YEAR(o.updateAt) = YEAR(CURRENT_DATE) and MONTH(o.updateAt) = MONTH(CURRENT_DATE)")
-    double getTotalPriceOrders();
+    @Query(value = "select COALESCE(SUM(o.totalPrice), 0) from Order o WHERE YEAR(o.updateAt) = YEAR(CURRENT_DATE) and MONTH(o.updateAt) = MONTH(CURRENT_DATE)")
+    Double getTotalPriceOrders();
 
     @Query(value = "select count(*) from User u WHERE YEAR(u.createdAt) = YEAR(CURRENT_DATE) and MONTH(u.createdAt) = MONTH(CURRENT_DATE)")
     Double countUsers();
