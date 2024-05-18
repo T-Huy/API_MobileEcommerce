@@ -89,7 +89,7 @@ public class UserController {
 	@RequestMapping(value = "/SignUp/Verify", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO> createUser(@RequestParam Integer otp, @RequestParam String email) {
 		if(otpService.validateOTP(email, otp, responseDTO)) {
-			Customer customer = new Customer(User.getUsername(),null,null,null);
+			Customer customer = new Customer(User.getUsername());
 			if(userService.save(User) && customerService.save(customer)) {
 				responseDTO.setMessage("Create User Success!!");
 				responseDTO.setHttpcode(HttpStatus.CREATED);

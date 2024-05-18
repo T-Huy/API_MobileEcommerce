@@ -16,12 +16,6 @@ public class CustomerDTO {
     private String avatar;
     private String fullname;
     private String phonenumber;
-    private String province;
-    private String district;
-    private String subdistrict;
-//    private Integer codeProvince;
-//    private Integer codeDistrict;
-//    private Integer codeSubDistrict;
 
     @Override
     public String toString() {
@@ -31,9 +25,6 @@ public class CustomerDTO {
                 ", avatar='" + avatar + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
-                ", province=" + province +
-                ", district=" + district +
-                ", subdistrict=" + subdistrict +
                 '}';
     }
 }

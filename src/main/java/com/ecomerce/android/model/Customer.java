@@ -38,15 +38,6 @@ public class Customer {
 	@Column(name = "avatar", columnDefinition = "varchar(200)")
     private String avatar;
 
-	@Column(name = "province", columnDefinition = "varchar(200)")
-    private String province;
-
-	@Column(name = "district", columnDefinition = "varchar(200)")
-    private String district;
-
-	@Column(name = "subdistrict", columnDefinition = "varchar(200)")
-    private String subdistrict;
-
 	@OneToOne()
 	@JoinColumn(name="userName")
 	private User user;
@@ -58,11 +49,8 @@ public class Customer {
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
 
-	public Customer(String userName, String province, String district, String subdistrict) {
+	public Customer(String userName) {
 		super();
 		this.userName = userName;
-		this.province = province;
-		this.district = district;
-		this.subdistrict = subdistrict;
 	}
 }
