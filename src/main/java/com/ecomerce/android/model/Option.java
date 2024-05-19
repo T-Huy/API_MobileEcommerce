@@ -54,4 +54,16 @@ public class Option implements Serializable {
 
 	@OneToMany(mappedBy="option")
 	private List<Image> images;
+
+	public Option(Product product, Color color, String ram, String rom, double price, int status) {
+		super();
+		this.product = product;
+		this.color = color;
+		this.ram = ram;
+		this.rom = rom;
+		this.price = price;
+		this.status = status;
+	}
+	
+	
 }

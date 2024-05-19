@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
+
+import com.ecomerce.android.model.Brand;
 import com.ecomerce.android.model.Product;
 
 import java.util.List;
@@ -41,4 +43,6 @@ public interface ProductReponsitory extends JpaRepository<Product, Integer>{
 
     @Query(value = "select *from product WHERE MATCH(product_name, os, cpu) against (?1)", nativeQuery = true)
     List<Product> searchProduct(String keyword);
+    
+    List<Product> findByProductName(String productName);
 }

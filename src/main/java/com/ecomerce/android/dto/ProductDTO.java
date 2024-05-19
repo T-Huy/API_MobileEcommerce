@@ -15,6 +15,7 @@ public class ProductDTO {
     private String cpu;
     private String description;
     private String origin;
+    private int brand_ID;
     private String os;
     private String battery;
 

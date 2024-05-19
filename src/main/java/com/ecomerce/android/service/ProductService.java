@@ -7,6 +7,8 @@ import java.util.Optional;
 import com.ecomerce.android.dto.BrandDTO;
 import com.ecomerce.android.dto.HomeViewDTO;
 import com.ecomerce.android.dto.ProductDTO;
+import com.ecomerce.android.dto.ReviewDTO;
+
 import org.springframework.stereotype.Service;
 
 import com.ecomerce.android.model.Product;
@@ -33,4 +35,6 @@ public interface ProductService {
                                    double startScreen, double endScreen);
 
     Boolean updateImage(Integer id, MultipartFile file) throws IOException;  
+    
+    Boolean insertProduct(ProductDTO productDTO, Integer id) throws IOException;
 }

@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface BrandReponsitory extends JpaRepository<Brand, Integer>{
     List<Brand> findByName(String name);
+    
+    
 }

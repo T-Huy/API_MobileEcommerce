@@ -7,21 +7,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.ecomerce.android.dto.HomeViewDTO;
 import com.ecomerce.android.dto.ProductDTO;
 import com.ecomerce.android.mapper.Mapper;
+import com.ecomerce.android.model.Brand;
 import com.ecomerce.android.model.Option;
-import com.ecomerce.android.responsitory.OptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
 import com.ecomerce.android.model.Product;
+import com.ecomerce.android.responsitory.BrandReponsitory;
+import com.ecomerce.android.responsitory.OptionRepository;
 import com.ecomerce.android.responsitory.ProductReponsitory;
 import com.ecomerce.android.service.ProductService;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,6 +33,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private OptionRepository optionRepository;
+	
+	@Autowired
+	private BrandReponsitory brandReponsitory;
+	
 	@Autowired
 	private Mapper productMapper;
 
@@ -174,4 +181,48 @@ public class ProductServiceImpl implements ProductService {
 			return false;
 		}
 	}
+
+	@Override
+	public Boolean insertProduct(ProductDTO productDTO, Integer id) throws IOException {
+		List<Product> listProductByName = productReponsitory.findByProductName(productDTO.getProductName());
+		if(listProductByName.size() >= 1) {
+			return false;
+		}
+//		String url = cloudinary.url().transformation(new Transformation().width(600).height(500).crop("limit")).generate(name);
+//		Map r = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("public_id", name));
+
+//		String url = cloudinary.url().generate(name);
+		Product product = new Product();
+		
+		BeanUtils.copyProperties(productDTO, product);
+		Brand br = brandReponsitory.findById(id).get();
+		
+		
+//		Option option = new Option(productDTO, , "4", "128", productDTO.getPrice(),1);
+////		option = Option.builder().product(productDTO.getProductId())
+//
+//					
+////				.
+		
+		
+		product = Product.builder()
+								.productName(productDTO.getProductName())
+								.os(productDTO.getOs())
+								.cpu(productDTO.getCpu())
+								.origin(productDTO.getOrigin())
+								.brand(br)
+								.description(productDTO.getDescription())
+								.battery(productDTO.getBattery())
+								.screen(productDTO.getScreen())
+								.price(productDTO.getPrice())
+								.build();
+		if(productReponsitory.save(product) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+
 }
