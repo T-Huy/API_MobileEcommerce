@@ -1,4 +1,4 @@
-package com.ecomerce.android.jwt.service;
+package com.ecomerce.android.utils.service;
 
 import java.io.IOException;
 import java.util.Optional;

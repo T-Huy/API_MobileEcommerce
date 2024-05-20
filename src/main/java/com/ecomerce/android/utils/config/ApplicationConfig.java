@@ -1,4 +1,4 @@
-package com.ecomerce.android.jwt.config;
+package com.ecomerce.android.utils.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

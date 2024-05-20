@@ -1,4 +1,4 @@
-package com.ecomerce.android.jwt.config;
+package com.ecomerce.android.utils.config;
 
 import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ecomerce.android.jwt.service.JwtAuthenticationTokenFilter;
+import com.ecomerce.android.utils.service.JwtAuthenticationTokenFilter;
 
 
 

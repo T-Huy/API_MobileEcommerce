@@ -1,4 +1,4 @@
-package com.ecomerce.android.jwt.config;
+package com.ecomerce.android.utils.config;
 
 import java.io.IOException;
 

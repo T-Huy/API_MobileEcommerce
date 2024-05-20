@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ecomerce.android.dto.EmailDTO;
 import com.ecomerce.android.dto.ResponseDTO;
-import com.ecomerce.android.jwt.service.JwtService;
 import com.ecomerce.android.model.Customer;
 import com.ecomerce.android.model.User;
 import com.ecomerce.android.sendmail.OtpService;
 import com.ecomerce.android.service.CustomerService;
 import com.ecomerce.android.service.UserService;
+import com.ecomerce.android.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
