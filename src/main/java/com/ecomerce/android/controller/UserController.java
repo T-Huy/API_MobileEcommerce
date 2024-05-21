@@ -90,6 +90,7 @@ public class UserController {
 	public ResponseEntity<ResponseDTO> createUser(@RequestParam Integer otp, @RequestParam String email) {
 		if(otpService.validateOTP(email, otp, responseDTO)) {
 			Customer customer = new Customer(User.getUsername());
+			customer.setAvatar("pf29d2f81-6b51-4c2d-9cb3-682939d76690.jpg");
 			if(userService.save(User) && customerService.save(customer)) {
 				responseDTO.setMessage("Create User Success!!");
 				responseDTO.setHttpcode(HttpStatus.CREATED);
